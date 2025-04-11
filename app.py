@@ -1,10 +1,9 @@
 from flask import Flask
 from src.models import db, ma
-from config.settings import DATABASE_URI
+from config.settings import DATABASE_URI, environment, front_end_url
 from src.routes.routes import bp as routes_bp
 from flask_cors import CORS
 from src.utils.constants import ENVIRONMENT
-from config.settings import environment, front_end_url
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI

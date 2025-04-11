@@ -15,7 +15,7 @@ origins_map = {
     ENVIRONMENT.PRODUCTION.value: [front_end_url]
 }
 
-allwed_origin = origins_map.get(environment, origins_map[ ENVIRONMENT.PRODUCTION.VALUE ])
+allwed_origin = origins_map.get(environment, origins_map[ENVIRONMENT.PRODUCTION.VALUE])
 
 CORS(app, origins = allwed_origin)
 

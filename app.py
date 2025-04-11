@@ -14,9 +14,12 @@ origins_map = {
     ENVIRONMENT.PRODUCTION.value: [front_end_url]
 }
 
-allwed_origin = origins_map.get(environment, origins_map[ENVIRONMENT.PRODUCTION.value])
+allowed_origin = origins_map.get(environment, origins_map[ENVIRONMENT.PRODUCTION.value])
 
-CORS(app, origins = allwed_origin)
+CORS(app, origins=allowed_origin,
+     supports_credentials=True,
+     allow_headers=["Content-Type", "Authorization", "Accept"],
+     methods=["GET"])
 
 db.init_app(app)
 ma.init_app(app)

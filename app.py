@@ -14,7 +14,15 @@ origins_map = {
     ENVIRONMENT.PRODUCTION.value: [front_end_url]
 }
 
-allowed_origins = origins_map.get(environment, origins_map[ENVIRONMENT.PRODUCTION.value])
+# Clean and validate origins
+allowed_origins = [
+    origin.strip().rstrip('/')
+    for origin in origins_map.get(environment, origins_map[ENVIRONMENT.PRODUCTION.value])
+    if origin
+]
+
+# Remove duplicates and empty values
+allowed_origins = list(set(filter(None, allowed_origins)))
 
 print(f"Environment: {environment}")
 print(f"Front-end URL: {front_end_url}")

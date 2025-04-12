@@ -14,29 +14,9 @@ origins_map = {
     ENVIRONMENT.PRODUCTION.value: [front_end_url]
 }
 
-# Clean and validate origins
-allowed_origins = [
-    origin.strip().rstrip('/')
-    for origin in origins_map.get(environment, origins_map[ENVIRONMENT.PRODUCTION.value])
-    if origin
-]
+allowed_origins = origins_map.get(environment, origins_map[ENVIRONMENT.PRODUCTION.value])
 
-# Remove duplicates and empty values
-allowed_origins = list(set(filter(None, allowed_origins)))
-
-print(f"Environment: {environment}")
-print(f"Front-end URL: {front_end_url}")
-print(f"Allowed origins: {allowed_origins}")
-
-CORS(app,
-     resources={r"/*": {
-         "origins": allowed_origins,
-         "supports_credentials": True,
-         "allow_headers": ["Content-Type", "Authorization", "Accept"],
-         "methods": ["GET", "OPTIONS"],
-         "expose_headers": ["Content-Type"],
-         "vary_header": True
-     }})
+CORS(app, origins=allowed_origins)
 
 db.init_app(app)
 ma.init_app(app)

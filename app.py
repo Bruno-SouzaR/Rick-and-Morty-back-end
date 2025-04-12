@@ -11,7 +11,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 origins_map = {
     ENVIRONMENT.LOCAL.value: ['*'],
-    ENVIRONMENT.PRODUCTION.value: [front_end_url]
+    ENVIRONMENT.PRODUCTION.value: ["*"],
 }
 
 allowed_origins = origins_map.get(environment, origins_map[ENVIRONMENT.PRODUCTION.value])

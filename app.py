@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
 from src.models import db, ma
-from config.settings import DATABASE_URI, environment, front_end_url, front_end_url_dev
+from config.settings import DATABASE_URI, environment, front_end_url
 from src.routes.routes import bp as routes_bp
 from src.utils.constants import ENVIRONMENT
 
@@ -11,7 +11,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 origins_map = {
     ENVIRONMENT.LOCAL.value: ['*'],
-    ENVIRONMENT.PRODUCTION.value: [front_end_url, front_end_url_dev]
+    ENVIRONMENT.PRODUCTION.value: [front_end_url]
 }
 
 allowed_origins = origins_map.get(environment, origins_map[ENVIRONMENT.PRODUCTION.value])

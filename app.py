@@ -20,10 +20,7 @@ print(f"Environment: {environment}")
 print(f"Front-end URL: {front_end_url}")
 print(f"Allowed origins: {allowed_origins}")
 
-CORS(app, origins=allowed_origins,
-     supports_credentials=True,
-     allow_headers=["Content-Type", "Authorization", "Accept"],
-     methods=["GET"])
+CORS(app, resources={r"/*": {"origins": allowed_origins}})
 
 db.init_app(app)
 ma.init_app(app)
